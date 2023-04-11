@@ -4,7 +4,7 @@ resource "aws_subnet" "test-public-eks-subnet1" {
     ]
 
     assign_ipv6_address_on_creation                = "false"
-    cidr_block                                     = "10.20.1.0/20"
+    cidr_block                                     = "10.20.1.0/24"
     enable_dns64                                   = "false"
     enable_resource_name_dns_a_record_on_launch    = "false"
     enable_resource_name_dns_aaaa_record_on_launch = "false"
@@ -35,7 +35,7 @@ resource "aws_subnet" "test-public-eks-subnet2" {
     ]
 
     assign_ipv6_address_on_creation                = "false"
-    cidr_block                                     = "10.20.2.0/20"
+    cidr_block                                     = "10.20.2.0/24"
     enable_dns64                                   = "false"
     enable_resource_name_dns_a_record_on_launch    = "false"
     enable_resource_name_dns_aaaa_record_on_launch = "false"
@@ -68,7 +68,7 @@ resource "aws_subnet" "test-private-eks-subnet1" {
     ]
 
     assign_ipv6_address_on_creation                = "false"
-    cidr_block                                     = "10.20.3.0/20"
+    cidr_block                                     = "10.20.3.0/24"
     enable_dns64                                   = "false"
     enable_resource_name_dns_a_record_on_launch    = "false"
     enable_resource_name_dns_aaaa_record_on_launch = "false"
@@ -99,7 +99,7 @@ resource "aws_subnet" "test-private-eks-subnet2" {
     ]
 
     assign_ipv6_address_on_creation                = "false"
-    cidr_block                                     = "10.20.4.0/20"
+    cidr_block                                     = "10.20.4.0/24"
     enable_dns64                                   = "false"
     enable_resource_name_dns_a_record_on_launch    = "false"
     enable_resource_name_dns_aaaa_record_on_launch = "false"
