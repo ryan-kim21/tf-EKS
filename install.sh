@@ -1,15 +1,14 @@
 #!/bin/bash
+cat ~/.aws/config
+cat ~/.aws/credentials
+
 
 sudo apt update
 sudo apt install awscli -y
 
-
-
-aws configure set aws_access_key_id []] --profile default
-aws configure set aws_secret_access_key []] --profile default
+aws configure set aws_access_key_id [] --profile default
+aws configure set aws_secret_access_key [] --profile default
 aws configure set region ap-northeast-2 --profile default
-
-
 
 
 curl -LO https://storage.googleapis.com/kubernetes-release/release/v1.23.6/bin/linux/amd64/kubectl
@@ -20,8 +19,6 @@ chmod +x kubectl
 mkdir -p ~/.local/bin
 mv ./kubectl ~/.local/bin/kubectl
 kubectl version --client
-
-
 
 
 
@@ -38,8 +35,38 @@ eksctl version
 
 aws eks --region ap-northeast-2 update-kubeconfig --name test-eks-cluster
 
+
+
+aws iam create-role \
+  --role-name test-ryan-eks-role \
+  --assume-role-policy-document file://trust-policy.json
+
+policy.json
+
+
+
+aws iam create-policy \
+  --policy-name test-ryan-eks-role \
+  --policy-document file://policy.json
+
+
+
+aws iam attach-role-policy \
+  --role-name test-ryan-eks-role \
+  --policy-arn arn:aws:iam::960524191939:policy/test-ryan-eks-role
+
+
+
+
+
+
+
+
+
 eksctl utils associate-iam-oidc-provider --region=ap-northeast-2 --cluster=test-eks-cluster --approve
 
+
+#aws load balancer controller iam 생성
 eksctl --profile default\
    --region=ap-northeast-2 \
   delete iamserviceaccount \
@@ -48,7 +75,7 @@ eksctl --profile default\
   --cluster test-eks-cluster 
 
 
-
+#rollbing
 eksctl --profile default\
        --region=ap-northeast-2 \
         create iamserviceaccount \
@@ -57,4 +84,11 @@ eksctl --profile default\
         --override-existing-serviceaccounts \
         --approve --cluster test-eks-cluster \
         --attach-policy-arn \
-        arn:aws:iam::[]:policy/test-alb-iam-policy
+        arn:aws:iam::960524191939:policy/test-alb-iam-policy
+
+
+eksctl-test-eks-cluster-addon-iamserviceacco-Role1-1Q8C86HI7DS1F
+
+aws iam detach-role-policy --role-name eksctl-test-eks-cluster-addon-iamserviceacco-Role1-1Q8C86HI7DS1F --policy-arn arn:aws:iam::960524191939:policy/test-alb-iam-policy
+
+
