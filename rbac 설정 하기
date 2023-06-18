@@ -14,8 +14,8 @@ eks - eks read, list 권한
 4. aws sts get-caller-identity
 ubuntu@ip-10-20-1-208:~$ aws sts get-caller-identity
 {
-    "UserId": "AIDA57I5UBDBT6LE3XTVJ",
-    "Account": "960524191939",
+    "UserId": "",
+    "Account": "",
     "Arn": "arn:aws:iam::960524191939:user/eks-test-user"
 }
 #####################################################################################
@@ -89,8 +89,8 @@ data:
 apiVersion: v1
 clusters:
 - cluster:
-    certificate-authority-data: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUMvakNDQWVhZ0F3SUJBZ0lCQURBTkJna3Foa2lHOXcwQkFRc0ZBREFWTVJNd0VRWURWUVFERXdwcmRXSmwKY201bGRHVnpNQjRYRFRJek1EUXhOakV5TlRRek0xb1hEVE16TURReE16RXlOVFF6TTFvd0ZURVRNQkVHQTFVRQpBeE1LYTNWaVpYSnVaWFJsY3pDQ0FTSXdEUVlKS29aSWh2Y05BUUVCQlFBRGdnRVBBRENDQVFvQ2dnRUJBUEgyCkdkWTM3bVE2L3VHaHdyZGpuYVE2SjYxYnA1NjVEVk42TEpKWTBadWZQN1pxbmIwcjV1NGhvRVhVdWdRS094NHIKbCtsY1c4S3QvZFBlMHpKNzgzOWhUSlBpV3FRR3VUdGdoSHBCdnJJcVQ2dmt5VlBoQUIvbkd0ZEwrbWFsNjc2SgpuK3BPSFNCcWd4ZndSbFZudnM5SDUyTTlHNnBuRjdKQ0o2RGF1TkdkRkFoVk5NQS9OUXdRWk5KWTB3dE03Q1FwCk42bEN3amZ3NFFHa1lFakJSUWhNa0JxcFVNa2Rxa0ZMQWErRVlWZ2tMVE96a1FwdVRKaDA4L0ZyWEF6RmFTWWEKT3Y3OFhVZXBnRHhlVXlIV1pPMWZOdzROQVpjbDZDeUhITDVaYWsvVCsyOElRTlVWRS96NTVnUlVmZ3ZrYVhwMApDMXJxWXA3aTEzWTM2b2g2d3FjQ0F3RUFBYU5aTUZjd0RnWURWUjBQQVFIL0JBUURBZ0trTUE4R0ExVWRFd0VCCi93UUZNQU1CQWY4d0hRWURWUjBPQkJZRUZLRzZib0xXck5oWTZYRER4SHRBMzJOOTYvS25NQlVHQTFVZEVRUU8KTUF5Q0NtdDFZbVZ5Ym1WMFpYTXdEUVlKS29aSWh2Y05BUUVMQlFBRGdnRUJBRlFUekNYbXNiSHdNSkdwNVlnUApZUjY4c2NacU1sL2tNMlZleVdLZG42OFc5UUNoRld2MSt3bHlRS0xOL1l0SktQeUFQajkzNTJpM0l4dDhCL2UzCnlQSnJRY3FrRWZLczU1NU5jVUZlU0NISE9CQk1PalhDUXBTTnEwUjAyRGN3WEhSbEdqV1IxR3lRN0JmT1RSWG0KTDh0WlVvaDdPSklmNHhib0w4YkVrUjF3bjZsejNsRTB5NWQ3NitTUjlZZHIrenRuS3JGOWFkRjVmNytyRmpMMQp6T3JzbTdNZVFWN1dTTDFGYnZnZFppNmdxT2x3aUxVSks2Vis5M1V6c0VmU053NW9EL3dYQlM3NWRHU3dVNUgrCnUwa1lQaDNaWDlxdUl3OXRhUlZpYkVKcThSbDJuUEdqL2M3UTV5V3pPTXZEYm94T2EwNmlGeUNoemw1cmdqSHYKemFBPQotLS0tLUVORCBDRVJUSUZJQ0FURS0tLS0tCg==
-    server: https://349EA73F55DC0A85997D8B7DDA33E39E.gr7.ap-northeast-2.eks.amazonaws.com
+    certificate-authority-data: ""
+    server: """"
   name: arn:aws:eks:ap-northeast-2:960524191939:cluster/test-eks-cluster
 contexts:
 - context:
@@ -116,8 +116,8 @@ users:
 
 
 
-aws configure set aws_access_key_id []] --profile default
-aws configure set aws_secret_access_key []] --profile default
+aws configure set aws_access_key_id [] --profile default
+aws configure set aws_secret_access_key [] --profile default
 aws configure set region ap-northeast-2 --profile default
 
 
