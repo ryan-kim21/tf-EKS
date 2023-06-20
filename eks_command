@@ -39,6 +39,14 @@ kubectl edit -n kube-system configmap/aws-auth
 
 
 
+--------------------------------
+
+check kubectl describe -n kube-system configmap/aws-auth
+
+
+
+
+
 
 
 
