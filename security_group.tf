@@ -1,31 +1,31 @@
 ########### EKS Security Group ###########
 
-resource "aws_security_group" "test-sg-eks-cluster" {
-  name        = "test-sg-eks-cluster"
-  description = "security_group for test-eks-cluster"
-  vpc_id      = aws_vpc.test-vpc.id
+resource "aws_security_group" "dev-sg-eks-cluster" {
+  name        = "dev-sg-eks-cluster"
+  description = "security_group for dev-eks-cluster"
+  vpc_id      = aws_vpc.dev-vpc.id
 
   tags = {
-    Name = "test-sg-eks-cluster"
+    Name = "dev-sg-eks-cluster"
   }
 }
 
-resource "aws_security_group_rule" "test-sg-eks-cluster-ingress" {
+resource "aws_security_group_rule" "dev-sg-eks-cluster-ingress" {
 
-  security_group_id = aws_security_group.test-sg-eks-cluster.id
+  security_group_id = aws_security_group.dev-sg-eks-cluster.id
   type              = "ingress"
-  description       = "ingress security_group_rule for test-eks-cluster"
+  description       = "ingress security_group_rule for dev-eks-cluster"
   from_port         = 0
   to_port           = 0
   protocol          = "-1"
   cidr_blocks       = ["0.0.0.0/0"]
 }
 
-resource "aws_security_group_rule" "test-sg-eks-cluster-egress" {
+resource "aws_security_group_rule" "dev-sg-eks-cluster-egress" {
 
-  security_group_id = aws_security_group.test-sg-eks-cluster.id
+  security_group_id = aws_security_group.dev-sg-eks-cluster.id
   type              = "egress"
-  description       = "egress security_group_rule for test-eks-cluster"
+  description       = "egress security_group_rule for dev-eks-cluster"
   from_port         = 0
   to_port           = 0
   protocol          = "-1"
@@ -34,10 +34,10 @@ resource "aws_security_group_rule" "test-sg-eks-cluster-egress" {
 
 ########### Bastion (EC2 Instance) Security Group ###########
 
-resource "aws_security_group" "test-sg-bastion" {
+resource "aws_security_group" "dev-sg-bastion" {
 
-  name   = "test-sg-bastion"
-  vpc_id = aws_vpc.test-vpc.id
+  name   = "dev-sg-bastion"
+  vpc_id = aws_vpc.dev-vpc.id
 
   ingress {
     cidr_blocks = ["0.0.0.0/0"]
@@ -58,6 +58,6 @@ resource "aws_security_group" "test-sg-bastion" {
   }
 
   tags = {
-    Name = "test-sg-bastion"
+    Name = "dev-sg-bastion"
   }
 }

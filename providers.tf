@@ -1,14 +1,14 @@
-terraform {
-  required_version = ">= 1.0"
+# terraform {
+#   required_version = ">= 1.0"
 
-  backend "s3" {
-    bucket = ""
-    key = "terraform.tfstate"
-    region = "ap-northeast-2"
-    dynamodb_table = "test-db-tf-lock"
-    encrypt = "true"
-  }
-}
+#   # backend "s3" {
+#   #   bucket = ""
+#   #   key = "terraform.tfstate"
+#     region = "ap-northeast-2"
+#   #   dynamodb_table = "test-db-tf-lock"
+#   #   encrypt = "true"
+#   # }
+# }
 
 provider "aws" {
   region = var.aws_region

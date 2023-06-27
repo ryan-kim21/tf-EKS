@@ -1,10 +1,10 @@
-resource "aws_instance" "test-ec2-bastion" {
+resource "aws_instance" "dev-ec2-bastion" {
 
   ami                         = "ami-0454bb2fefc7de534"
   associate_public_ip_address = "true"
   availability_zone           = "ap-northeast-2a"
 
-  iam_instance_profile        = aws_iam_instance_profile.test-ec2-instance-profile.name
+  iam_instance_profile        = aws_iam_instance_profile.dev-ec2-instance-profile.name
   key_name                    = ""
 
   capacity_reservation_specification {
@@ -41,7 +41,7 @@ resource "aws_instance" "test-ec2-bastion" {
     encrypted             = "false"
 
     tags = {
-      Name        = "test-ec2-bastion-ebs"
+      Name        = "dev-ec2-bastion-ebs"
     }
 
     volume_size = "8"
@@ -52,15 +52,15 @@ resource "aws_instance" "test-ec2-bastion" {
 
 
   tags = {
-    Name        = "test-ec2-bastion"
+    Name        = "dev-ec2-bastion"
   }
 
   tags_all = {
-    Name        = "test-ec2-bastion"
+    Name        = "dev-ec2-bastion"
   }
 
   tenancy       = "default"
 
-  subnet_id     = aws_subnet.test-public-eks-subnet1.id
-  vpc_security_group_ids = [aws_security_group.test-sg-bastion.id]
+  subnet_id     = aws_subnet.dev-public-eks-subnet1.id
+  vpc_security_group_ids = [aws_security_group.dev-sg-bastion.id]
 }

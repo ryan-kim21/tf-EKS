@@ -1,4 +1,4 @@
-resource "aws_vpc" "test-vpc"{
+resource "aws_vpc" "dev-vpc"{
     assign_generated_ipv6_cidr_block = false
     cidr_block = "10.20.0.0/16"
     //enable_classiclink = false
@@ -8,11 +8,11 @@ resource "aws_vpc" "test-vpc"{
     //instance_tenancy = default
 
     tags = {
-        Name = "test-vpc"
+        Name = "dev-vpc"
     }
 
     tags_all = {
-        Name = "test-vcp"
+        Name = "dev-vcp"
     }
 
 }

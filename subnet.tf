@@ -1,6 +1,6 @@
-resource "aws_subnet" "test-public-eks-subnet1" {
+resource "aws_subnet" "dev-public-eks-subnet1" {
     depends_on = [
-      aws_vpc.test-vpc
+      aws_vpc.dev-vpc
     ]
 
     assign_ipv6_address_on_creation                = "false"
@@ -13,25 +13,25 @@ resource "aws_subnet" "test-public-eks-subnet1" {
     private_dns_hostname_type_on_launch            = "ip-name"
 
     tags = {
-        Name = "test-public-eks-subnet1"
-        "kubernetes.io/cluster/test-eks-cluster" = "shared"
+        Name = "dev-public-eks-subnet1"
+        "kubernetes.io/cluster/dev-eks-cluster" = "shared"
         "kubernetes.io/role/elb"                 = 1
     }
     
     tags_all = {
-    Name                                     = "test-public-eks-subnet1"
-    "kubernetes.io/cluster/test-eks-cluster" = "shared"
+    Name                                     = "dev-public-eks-subnet1"
+    "kubernetes.io/cluster/dev-eks-cluster" = "shared"
     "kubernetes.io/role/elb"                 = 1
     }
 
-    vpc_id = aws_vpc.test-vpc.id
+    vpc_id = aws_vpc.dev-vpc.id
     availability_zone = "ap-northeast-2a"
 
 }
 
-resource "aws_subnet" "test-public-eks-subnet2" {
+resource "aws_subnet" "dev-public-eks-subnet2" {
     depends_on = [
-      aws_vpc.test-vpc
+      aws_vpc.dev-vpc
     ]
 
     assign_ipv6_address_on_creation                = "false"
@@ -44,27 +44,27 @@ resource "aws_subnet" "test-public-eks-subnet2" {
     private_dns_hostname_type_on_launch            = "ip-name"
 
     tags = {
-        Name = "test-public-eks-subnet2"
-        "kubernetes.io/cluster/test-eks-cluster" = "shared"
+        Name = "dev-public-eks-subnet2"
+        "kubernetes.io/cluster/dev-eks-cluster" = "shared"
         "kubernetes.io/role/elb"                 = 1
     }
     
     tags_all = {
-    Name                                     = "test-public-eks-subnet2"
-    "kubernetes.io/cluster/test-eks-cluster" = "shared"
+    Name                                     = "dev-public-eks-subnet2"
+    "kubernetes.io/cluster/dev-eks-cluster" = "shared"
     "kubernetes.io/role/elb"                 = 1
     }
     
-    vpc_id = aws_vpc.test-vpc.id
+    vpc_id = aws_vpc.dev-vpc.id
     availability_zone = "ap-northeast-2c"
 
 }
 
 ############ Private Subnets ############
 
-resource "aws_subnet" "test-private-eks-subnet1" {
+resource "aws_subnet" "dev-private-eks-subnet1" {
     depends_on = [
-      aws_vpc.test-vpc
+      aws_vpc.dev-vpc
     ]
 
     assign_ipv6_address_on_creation                = "false"
@@ -77,25 +77,25 @@ resource "aws_subnet" "test-private-eks-subnet1" {
     private_dns_hostname_type_on_launch            = "ip-name"
 
     tags = {
-        Name = "test-private-eks-subnet1"
-        "kubernetes.io/cluster/test-eks-cluster" = "shared"
+        Name = "dev-private-eks-subnet1"
+        "kubernetes.io/cluster/dev-eks-cluster" = "shared"
         "kubernetes.io/role/elb"                 = 1
     }
     
     tags_all = {
-    Name                                     = "test-private-eks-subnet1"
-    "kubernetes.io/cluster/test-eks-cluster" = "shared"
+    Name                                     = "dev-private-eks-subnet1"
+    "kubernetes.io/cluster/dev-eks-cluster" = "shared"
     "kubernetes.io/role/elb"                 = 1
     }
 
-    vpc_id = aws_vpc.test-vpc.id
+    vpc_id = aws_vpc.dev-vpc.id
     availability_zone = "ap-northeast-2a"
 
 }
 
-resource "aws_subnet" "test-private-eks-subnet2" {
+resource "aws_subnet" "dev-private-eks-subnet2" {
     depends_on = [
-      aws_vpc.test-vpc
+      aws_vpc.dev-vpc
     ]
 
     assign_ipv6_address_on_creation                = "false"
@@ -108,18 +108,18 @@ resource "aws_subnet" "test-private-eks-subnet2" {
     private_dns_hostname_type_on_launch            = "ip-name"
 
     tags = {
-        Name = "test-private-eks-subnet2"
-        "kubernetes.io/cluster/test-eks-cluster" = "shared"
+        Name = "dev-private-eks-subnet2"
+        "kubernetes.io/cluster/dev-eks-cluster" = "shared"
         "kubernetes.io/role/elb"                 = 1
     }
     
     tags_all = {
-    Name                                     = "test-private-eks-subnet2"
-    "kubernetes.io/cluster/test-eks-cluster" = "shared"
+    Name                                     = "dev-private-eks-subnet2"
+    "kubernetes.io/cluster/dev-eks-cluster" = "shared"
     "kubernetes.io/role/elb"                 = 1
     }
 
-    vpc_id = aws_vpc.test-vpc.id
+    vpc_id = aws_vpc.dev-vpc.id
     availability_zone = "ap-northeast-2c"
 
 }

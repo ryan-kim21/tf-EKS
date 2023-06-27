@@ -1,5 +1,5 @@
-resource "aws_iam_instance_profile" "test-ec2-instance-profile" {
-  name = "test-ec2-instance-profile"
+resource "aws_iam_instance_profile" "dev-ec2-instance-profile" {
+  name = "dev-ec2-instance-profile"
   path = "/"
-  role = "test-iam-role-ec2-instance-bastion"
+  role = "dev-iam-role-ec2-instance-bastion"
 }
