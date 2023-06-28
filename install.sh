@@ -33,12 +33,14 @@ curl --silent --location "https://github.com/weaveworks/eksctl/releases/latest/d
 sudo mv /tmp/eksctl /usr/local/bin
 eksctl version
 
-aws eks --region ap-northeast-2 update-kubeconfig --name test-eks-cluster
+aws eks --region ap-northeast-2 update-kubeconfig --name dev-eks-cluster
 
 
+
+##################################################################################
 
 aws iam create-role \
-  --role-name test-ryan-eks-role \
+  --role-name dev-ryan-eks-role \
   --assume-role-policy-document file://trust-policy.json
 
 policy.json
@@ -46,24 +48,26 @@ policy.json
 
 
 aws iam create-policy \
-  --policy-name test-ryan-eks-role \
+  --policy-name dev-ryan-eks-role \
   --policy-document file://policy.json
 
 
 
 aws iam attach-role-policy \
-  --role-name test-ryan-eks-role \
-  --policy-arn arn:aws:iam::960524191939:policy/test-ryan-eks-role
+  --role-name dev-ryan-eks-role \
+  --policy-arn arn:aws:iam::960524191939:policy/dev-ryan-eks-role
 
+#######################################################################################################
 
+eksctl utils associate-iam-oidc-provider --region=ap-northeast-2 --cluster=dev-eks-cluster --approve
 
+eksctl --profile default \
+       --region=ap-northeast-2 \
+       delete iamserviceaccount \
+       --name aws-load-balancer-controller \
+       --namespace kube-system \
+       --cluster dev-eks-cluster
 
-
-
-
-
-
-eksctl utils associate-iam-oidc-provider --region=ap-northeast-2 --cluster=test-eks-cluster --approve
 
 
 #aws load balancer controller iam 생성
@@ -72,7 +76,7 @@ eksctl --profile default\
   delete iamserviceaccount \
   --name aws-load-balancer-controller \
   --namespace kube-system \
-  --cluster test-eks-cluster 
+  --cluster dev-eks-cluster 
 
 
 #rollbing
@@ -82,13 +86,78 @@ eksctl --profile default\
         --name aws-load-balancer-controller \
         --namespace kube-system \
         --override-existing-serviceaccounts \
-        --approve --cluster test-eks-cluster \
+        --approve --cluster dev-eks-cluster \
         --attach-policy-arn \
-        arn:aws:iam::960524191939:policy/test-alb-iam-policy
+        arn:aws:iam::960524191939:policy/dev-alb-iam-policy
 
 
-eksctl-test-eks-cluster-addon-iamserviceacco-Role1-1Q8C86HI7DS1F
+##### ?
 
-aws iam detach-role-policy --role-name eksctl-test-eks-cluster-addon-iamserviceacco-Role1-1Q8C86HI7DS1F --policy-arn arn:aws:iam::960524191939:policy/test-alb-iam-policy
+eksctl-dev-eks-cluster-addon-iamserviceacco-Role1-1Q8C86HI7DS1F
+
+aws iam detach-role-policy --role-name eksctl-dev-eks-cluster-addon-iamserviceacco-Role1-1Q8C86HI7DS1F --policy-arn arn:aws:iam::960524191939:policy/dev-alb-iam-policy
+
+
+## result
+2023-06-27 14:50:29 [ℹ]  will create IAM Open ID Connect provider for cluster "dev-eks-cluster" in "ap-northeast-2"
+2023-06-27 14:50:29 [✔]  created IAM Open ID Connect provider for cluster "dev-eks-cluster" in "ap-northeast-2"
+ubuntu@ip-10-20-1-84:~$ 
+ubuntu@ip-10-20-1-84:~$ eksctl --profile default\
+>    --region=ap-northeast-2 \
+>   delete iamserviceaccount \
+>   --name aws-load-balancer-controller \
+>   --namespace kube-system \
+>   --cluster dev-eks-cluster 
+
+2023-06-27 14:50:35 [ℹ]  1 iamserviceaccount (kube-system/aws-load-balancer-controller) was included (based on the include/exclude rules)
+2023-06-27 14:50:35 [ℹ]  1 task: { delete serviceaccount "kube-system/aws-load-balancer-controller" }
+2023-06-27 14:50:35 [ℹ]  serviceaccount "kube-system/aws-load-balancer-controller" was already deleted
+ubuntu@ip-10-20-1-84:~$ 
+ubuntu@ip-10-20-1-84:~$ 
+ubuntu@ip-10-20-1-84:~$ #rollbing
+ubuntu@ip-10-20-1-84:~$ eksctl --profile default\
+>        --region=ap-northeast-2 \
+>         create iamserviceaccount \
+>         --name aws-load-balancer-controller \
+>         --namespace kube-system \
+>         --override-existing-serviceaccounts \
+>         --approve --cluster dev-eks-cluster \
+>         --attach-policy-arn \
+>         arn:aws:iam::960524191939:policy/dev-alb-iam-policy
+2023-06-27 14:50:36 [ℹ]  1 iamserviceaccount (kube-system/aws-load-balancer-controller) was included (based on the include/exclude rules)
+2023-06-27 14:50:36 [!]  metadata of serviceaccounts that exist in Kubernetes will be updated, as --override-existing-serviceaccounts was set
+2023-06-27 14:50:36 [ℹ]  1 task: { 
+    2 sequential sub-tasks: { 
+        create IAM role for serviceaccount "kube-system/aws-load-balancer-controller",
+        create serviceaccount "kube-system/aws-load-balancer-controller",
+    } }2023-06-27 14:50:36 [ℹ]  building iamserviceaccount stack "eksctl-dev-eks-cluster-addon-iamserviceaccount-kube-system-aws-load-balancer-controller"
+2023-06-27 14:50:37 [ℹ]  deploying stack "eksctl-dev-eks-cluster-addon-iamserviceaccount-kube-system-aws-load-balancer-controller"
+2023-06-27 14:50:37 [ℹ]  waiting for CloudFormation stack "eksctl-dev-eks-cluster-addon-iamserviceaccount-kube-system-aws-load-balancer-controller"
+2023-06-27 14:51:07 [ℹ]  waiting for CloudFormation stack "eksctl-dev-eks-cluster-addon-iamserviceaccount-kube-system-aws-load-balancer-controller"
+2023-06-27 14:51:53 [ℹ]  waiting for CloudFormation stack "eksctl-dev-eks-cluster-addon-iamserviceaccount-kube-system-aws-load-balancer-controller"
+2023-06-27 14:51:53 [ℹ]  created serviceaccount "kube-system/aws-load-balancer-controller
+
+
+
+
+
+aws eks update-cluster-config \
+    --region ap-northeast-2 \
+    --name dev-eks-cluster \
+    --resources-vpc-config endpointPublicAccess=true,publicAccessCidrs="203.0.113.5/32",endpointPrivateAccess=true
+
+
+curl -L https://git.io/get_helm.sh | bash -s -- --version v3.8.2
+
+curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 ##< 이거 안됨
+
+chmod 700 get_helm.sh
+./get_helm.sh
+
+helm repo add aws https://aws.github.io/eks-charts
+
+helm install my-aws-load-balancer-controller aws/aws-load-balancer-controller --version 1.5.4 --set clusterName=dev-eks-cluster
+helm pull aws/aws-load-balancer-controller --version 1.5.4
+
 
 
